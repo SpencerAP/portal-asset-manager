@@ -1,11 +1,14 @@
-AssetManager = function() {
+PortalAssetManager = function(apiV3Key, bearerToken) {
+	this.apiV3Key = apiV3Key;
+	this.bearerToken = bearerToken;
 	this.init();
 };
 
-AssetManager.prototype = {
+PortalAssetManager.prototype = {
 	apiV3Base: 'https://www.photoshelter.com/psapi/v3.0/',
 	apiV3Key: null,
 	authToken: null,
+	bearerToken: null,
 	userId: null,
 	orgId: null,
 	tplCache: {},
@@ -14,9 +17,21 @@ AssetManager.prototype = {
 	fileInputElem: document.querySelector('#file-input'),
 	availBytes: 104857600,
 
-	init: function() {
+	init: async function() {
+		this.clearCode();
+		this.userId = await this.getUserId();
 		this.refreshAssets();
 		this.uploadElem.addEventListener('click', event => this.upload(event));
+	},
+
+	// clear the oauth code from the URL bar, it's no longer usable
+	clearCode: function() {
+		if (!window.location.search.includes('code')) {
+			return;
+		}
+
+		let url = new URL(window.location.origin + window.location.pathname);
+		window.history.pushState({}, '', url);
 	},
 
 	upload: async function(clickEvent) {
@@ -51,13 +66,19 @@ AssetManager.prototype = {
 
 	refreshAssets: async function() {
 		this.loadingElem.textContent = 'Querying assets...';
+
 		let sumBytes = 0;
 		let assets = await this.getAssets();
+
 		for (let i = 0, link; i < assets.length; i++) {
+
+			// sadly the links aren't available as an extend,
+			// we have to query for each one
 			link = await this.getAssetLink(assets[i].asset_id);
 			// API does not return HTTPS links,
 			// though HTTPS is supported. Lame!
 			assets[i].link = link.replace('http://', 'https://');
+
 			assets[i].is_image = assets[i].mime_type.includes('image/');
 			assets[i].row_num = i + 1;
 			sumBytes += parseInt(assets[i].file_size);
@@ -74,7 +95,7 @@ AssetManager.prototype = {
 	apiV3Fetch: async function(method, url, data = {}) {
 		let headers = new Headers();
 		headers.append('X-PS-Api-Key', this.apiV3Key);
-		headers.append('X-PS-Auth-Token', this.authToken);
+		headers.append('Authorization', 'Bearer ' + this.bearerToken);
 
 		let fetchOpt = {
 			method: method,
@@ -93,6 +114,11 @@ AssetManager.prototype = {
 		let result = await response.json();
 
 		return result;
+	},
+
+	getUserId: async function() {
+		let response = await this.apiV3Fetch('GET', 'mem/user/session');
+		return response.data.Session.user_id;
 	},
 
 	getAssets: async function() {

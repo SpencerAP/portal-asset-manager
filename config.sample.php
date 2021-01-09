@@ -19,3 +19,18 @@ define('PS_URL_BASE', 'https://www.photoshelter.com/');
  * @var string V3 API Key. V4 does not yet have asset endpoints.
  */
 define('V3_API_KEY', '');
+
+/**
+ * @var string V4 API Key. Used for OAuth.
+ */
+define('V4_API_KEY', '');
+
+/**
+ * @var string OAuth client ID.
+ */
+define('OAUTH_CLIENT_ID', '');
+
+/**
+ * @var string OAuth client ID.
+ */
+define('OAUTH_CLIENT_SECRET', '');
