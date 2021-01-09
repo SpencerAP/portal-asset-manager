@@ -2,6 +2,8 @@
 
 PhotoShelter allows users to host files such as images, JS, and CSS for use in customizing their portals/websites. This is a mini app that helps you see what assets are being stored and manage them as you wish.
 
+The app uses OAuth2 for authenticating into PhotoShelter. No state is persisted though, so you'll have to reauth with every page reload.
+
 ## Requirements
 
 A webserver with PHP 7.1+
