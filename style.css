@@ -1,0 +1,44 @@
+html, body {
+	margin: 0px;
+	border: 0px;
+	font-family: 'Yantramanav', serif;
+}
+
+body {
+	margin: 0 20px;
+}
+
+h1 {
+	margin: 15px 20px 15px 0;
+	display: inline-block;
+}
+
+#loading {
+	min-height: 22px;
+}
+
+#asset-table td {
+	font-family: 'Oxygen Mono', monospace;
+}
+
+th {
+	background: #F5DF4D;
+	font-size: 16px;
+	padding: 5px 10px;
+}
+
+td {
+	background: #F0EEE9;
+	font-size: 12px;
+	padding: 5px 10px;
+}
+
+.preview {
+	height: 30px;
+	width: 30px;
+}
+
+.preview img {
+	max-height: 100%;
+	max-width: 100%;
+}
