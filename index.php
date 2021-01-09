@@ -10,13 +10,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Yantramanav&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Oxygen+Mono&display=swap" rel="stylesheet">
-<link href="style.css?ts=<?php echo time() ?>" rel="stylesheet">
+<link href="css/style.css?ts=<?php echo time() ?>" rel="stylesheet">
 
 <h1>Portal Asset Manager</h1>
 
 <?php
 require_once 'config.php';
-require_once 'src.php';
+require_once 'lib/src.php';
 
 $code = $_GET['code'] ?? null;
 $state = $_GET['state'] ?? null;
@@ -29,10 +29,10 @@ $apiKey = V3_API_KEY;
 $mode = ($code || $bearerToken) ? 'app' : 'login';
 switch ($mode) {
 case 'app':
-	require_once 'view-app.php';
+	require_once 'views/view-app.php';
 	break;
 case 'login':
-	require_once 'view-login.php';
+	require_once 'views/view-login.php';
 	break;
 }
 

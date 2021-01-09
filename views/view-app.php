@@ -62,4 +62,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<script src="portal-asset-manager.js?ts=<?php echo time() ?>"></script>
+<script src="js/portal-asset-manager.js?ts=<?php echo time() ?>"></script>
