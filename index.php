@@ -1,6 +1,8 @@
 <?php
 $now = time();
 
+require_once 'config.php';
+
 // 'ZL.EvWsAaxHKdY_rcaM0'
 ?>
 <!DOCTYPE html>
