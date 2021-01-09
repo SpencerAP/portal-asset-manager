@@ -1,8 +1,8 @@
 # portal-asset-manager
 
-PhotoShelter allows users to host files such as images, JS, and CSS for use in customizing their portals/websites. This is a mini app that helps you see what assets are being stored and manage them as you wish.
+PhotoShelter allows you to host files such as images, JS, and CSS for use in customizing your PhotoShelter portal/website. This is a mini app that helps you see what assets are being stored and manage them as you wish.
 
-Note that some of these assets may be used by parts of your site (favicon, logo, portal cover, etc.), so be careful when deleting!
+Note that some of these assets may be actively used by parts of your site (favicon, logo, portal cover, etc.), so be careful what you delete!
 
 The app uses OAuth2 for authenticating into PhotoShelter. No state is persisted though, so you'll have to reauth with every page reload.
 
